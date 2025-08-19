@@ -4,17 +4,13 @@
 **Scope**
 Phase 2 consolidates **applied reversing** and builds your **first userland execution paths**. You’ll analyze real binaries (static/dynamic), unpack simple layers, and develop in-memory loaders that stage benign payloads using classic injection techniques—while accounting for modern mitigations (DEP/ASLR/CFG). This phase sets up the bridge into Initial Access (8A), Blue validation (8B), and later evasion work.&#x20;
 
----
-
-## Methodology
+**Methodology**
 
 * **PBR — Proof-of-Bounty-Readiness:** reproducible labs with clear goals, pinned tooling, and minimal evidence (logs, hashes, screenshots).
 * **PAD — Practical Aptitude Drill:** a **block-integrated, multi-technique mission** that evaluates applied proficiency across that block’s stacks (one PAD per block).
 * **OPSEC/Legal:** lab-only, VMs, benign payloads, snapshots/rollback; no third-party targets.
 
----
-
-## Phase-level outcomes
+**Phase-level outcomes**
 
 By the end of IBM1401 you will have:
 
