@@ -2,7 +2,7 @@
 # PLAN — Try Of Check Dogs (TOCD)
 
 **Author:** Denis Pérez  
-**Last updated:** 2025-08-10
+**Last updated:** 2025-08-19
 
 ---
 
