@@ -24,7 +24,7 @@
 ### Q1 — 2025-08-14 → 2025-11-30 (Phase 1 — start)
 | Block | Title | PBR | PAD | Status | Notes |
 |---|---|---:|---:|---|---|
-| 0B01 | Linux/CLI/Bash & Ecosystem | 0 | 0 | ☐ Not started | First PBR window upcoming |
+| 0B01 | Linux/CLI/Bash & Ecosystem | 0 | 0 | ◐ In progress | First PBR window upcoming |
 | 1B01 | Toolchain, Debugging & VCS | 0 | 0 | ☐ Not started | Planning stage |
 
 ### Q2 — 2025-12-01 → 2026-02-07 (Phase 1 — closure)
