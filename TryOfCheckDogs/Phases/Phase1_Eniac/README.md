@@ -80,12 +80,4 @@
 
 ---
 
-## Getting started
-
-* Use the block README in each folder to see goals, acceptance criteria, and **how to reproduce**.
-* Prefer `make lab-setup && make run` patterns where provided.
-* Keep evidence under `evidence/<block>/pbrXX/` with `ENVINFO.md` + `SHA256SUMS.txt`.
-
----
-
 **Ethics & scope.** Lab-only, benign payloads, NAT-only networking, and no third-party systems. See `docs/Opsec_Legal.md` for the full policy.
