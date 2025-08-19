@@ -107,6 +107,3 @@ By the end of IBM1401 you will have:
 * **No** testing against third-party systems without written authorization.
 * **All** artifacts must be reversible with snapshots/rollback.
 * **No** operational malware; educational PoCs only.
-
-> This phase plan is aligned with the TOCD syllabus for Applied Analysis & RCE. Detailed block content, PBRs, PADs, and the bridge into 8A/8B follow the same source syllabus.&#x20;
-
