@@ -78,9 +78,9 @@ Recruiters and hiring managers who need a fast, high-signal overview of the repo
 ## 8) Key links (expected locations)
 - **General plan:** `Plan_TryOfCheckDogs.md`  
 - **Syllabus summary:** `Syllabus_Summary.md`  
-- **Encrypted Missions Guide:** `docs/encrypted-missions.md`  
+- **Encrypted Missions Guide:** `docs/encrypted_missions.md`  
 - **Progress & metrics:** `docs/progression.md`  
-- **OPSEC/Legal:** `docs/opsec-legal.md`
+- **OPSEC/Legal:** `docs/opsec_legal.md`
 
 > If any link is not yet live, it’s planned in `docs/` and will be populated as the path advances.
 
