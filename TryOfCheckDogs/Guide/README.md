@@ -86,4 +86,3 @@ Recruiters and hiring managers who need a fast, high-level understanding of the 
 
 ## 9) Contact
 For a guided 15–20 min walkthrough of the repo and evidence, open an issue tagged **demo-request** or use the contact channel in the profile.
-```
