@@ -1,105 +1,66 @@
 
-# Phase 2 — IBM1401 (Applied Analysis & RCE)
+# Phase 2 — IBM 1401 (Applied Reversing & Userland Execution)
 
-**Scope**
-Phase 2 consolidates **applied reversing** and builds your **first userland execution paths**. You’ll analyze real binaries (static/dynamic), unpack simple layers, and develop in-memory loaders that stage benign payloads using classic injection techniques—while accounting for modern mitigations (DEP/ASLR/CFG). This phase sets up the bridge into Initial Access (8A), Blue validation (8B), and later evasion work.&#x20;
+**Scope.** Phase 2 consolidates applied reversing and the first userland execution paths. You’ll learn to reason about real-world binaries (static/dynamic), manually unpack simple layers, and build **loaders** that execute benign payloads in memory using classic injection techniques, while accounting for modern mitigations.
 
-**Methodology**
+**Methodology.** Each block closes with **PBR** (reproducible lab) + **PAD** (Practical Aptitude Drill: a scenario-style, **integrated multi-tech mission per block**, with evidence and replication steps). OPSEC/Legal is applied throughout.
 
-* **PBR — Proof-of-Bounty-Readiness:** reproducible labs with clear goals, pinned tooling, and minimal evidence (logs, hashes, screenshots).
-* **PAD — Practical Aptitude Drill:** a **block-integrated, multi-technique mission** that evaluates applied proficiency across that block’s stacks (one PAD per block).
-* **OPSEC/Legal:** lab-only, VMs, benign payloads, snapshots/rollback; no third-party targets.
-
-**Phase-level outcomes**
-
-By the end of IBM1401 you will have:
-
-* A **reversing report** for a real (lightly obfuscated) binary and a **reproducible unpack**.&#x20;
-* A usable **PE parser** and small analysis utilities.&#x20;
-* A **userland loader** offering **≥2 execution techniques** (e.g., CRT+LoadLibrary, APC).&#x20;
-* An **intro process-hollowing** PoC (lab only).&#x20;
-* Clean documentation/evidence habits suitable for Bug Bounty.&#x20;
+**Phase-level outcomes.**
+• Reversing report on a real binary (light obfuscation) with a **reproducible unpack**. • A usable **PE parser** and supporting analysis utilities. • A **userland loader** implementing at least two execution techniques. • Intro **process hollowing** PoC in a controlled lab. • Documentation discipline and an evidence pack suitable for future bug bounty work.
 
 ---
 
 ## How Phase 2 is organized
 
-* **Nomenclature:** blocks use `XBYY` (e.g., `0B04`) → `X` = block index from 0; `YY` = number of stacks in the block.
-* **Blocks & flow:**
+**Nomenclature.** Blocks use short codes like `0B01`, where `X` is the zero-based block index and `YY` is the count of stacks inside that block (when applicable).
 
-  1. `0B04` → Reversing pipeline & basic unpack
-  2. `1B04` → PE internals & in-memory loaders
-  3. `2B04` → Userland execution techniques & mitigations
-     *(Express)* `EX0B01` → Automation & harness
-* **Bridge into operations:** after `2B04`, insert **8A (Initial Access)** and **8B (Minimal Blue Track)** before deeper evasion/obfuscation.&#x20;
+**Blocks in IBM 1401**
 
----
+### `0B04` — Applied Reversing I: tools, methodology & basic unpacking
 
-## Blocks in IBM1401
-
-### `0B04` — Applied Reversing I: tooling, methodology & basic unpacking
-
-**Stacks (high-level):** static analysis (strings/CFG/cc), dynamic analysis (x64dbg/WinDbg), trivial anti-analysis & bypass, single-layer unpack (e.g., UPX) + minimal IAT fix, Python support scripting.
-**Core PBRs:** reversing report; manual unpack with clean dump + IAT; string/config decoder with tests.
-**PAD:** end-to-end drill demonstrating the pipeline on a fresh sample (controlled).&#x20;
+**Goal.** Master a static/dynamic pipeline with Ghidra/IDA and x64dbg/WinDbg; spot trivial anti-analysis; perform a **manual unpack** of one layer (e.g., UPX-like) with minimal IAT reconstruction.
+**Highlights.** Ghidra/IDA (free), rizin/Cutter, x64dbg/WinDbg; strings/signatures, CFG, calling conventions, struct recovery; breakpoints, memory map, dump & patch, basic relocations; simple anti-debug/time checks and bypasses; **Packers 101** (find OEP, rebuild IAT); Python scripting for decoders/parsers and dump automation.
+**PBR examples.** Reversing report for a small sample with obfuscated strings; **manual unpack** of a packed sample with a clean dump and functional IAT; **string/config decoder** script (e.g., XOR/RC4-lite) with unit tests.
+**PAD evidence.** Step-by-step methodology, screenshots, pre/post checksums, issues encountered and mitigations; third-party reproducibility via your repo/lab checklist.
 
 ### `1B04` — Deep PE, Windows API & in-memory loaders
 
-**Stacks:** PE headers/sections/imports/relocs/TLS; process/thread/memory APIs; minimal local shellcode loader; **intro manual mapping** of a benign DLL; inspection/validation (PH, PE-sieve).
-**Core PBRs:** PE parser; local loader with robust error handling; minimal DLL manual-map + exported function call.
-**PAD:** integrated loader mission with diagrams, safety notes, tests.&#x20;
+**Goal.** Understand PE in practice (headers, sections, imports/exports, relocations, TLS) and build **loaders** that run benign payloads in memory, advancing toward **manual mapping** basics.
+**Highlights.** DOS/NT headers; sections vs segments; imports/exports; relocations; TLS callbacks; PE vs ELF contrasts. Windows processes/threads/memory: `VirtualAlloc{Ex}`, `WriteProcessMemory`, `Create{Remote}Thread`, `VirtualProtect`. Minimal loader: allocate + copy + protect + controlled jump. **Manual mapping (intro):** DLL load without `LoadLibrary` (selected import resolution, essential relocs, no advanced TLS). Stability concerns: perms, offsets, alignment, silent crashes. Inspection with Process Hacker, PE-bear, PE-sieve.
+**PBR examples.** **PE parser** that prints key headers, sections, and imports with a basic integrity check; **local shellcode loader** with error handling and cleanup; **intro manual map** of a tiny DLL and execution of an exported function.
+**PAD evidence.** Loader design, memory layout diagrams, risk notes, and test harness with sanitized error handling.
 
 ### `2B04` — Userland execution paths & modern mitigations
 
-**Stacks:** CRT+LoadLibrary; APC (incl. early-bird); **intro process hollowing**; PPID spoofing & creation flags (lab); light obfuscation (API hashing, string hiding); mitigations (DEP/ASLR/CFG) & detection surfaces; syscall intro (no deep unhooking yet).
-**Core PBRs:** multi-mode loader (CLI-selectable techniques); hollowing PoC with safe rollback; artifact/telemetry comparison across techniques.
-**PAD:** comparative mission documenting mitigations, artifacts, and next-step improvements (for 8A/8B/Phase 3).&#x20;
-
-### `EX0B01` — Express Module F2: automation & auxiliary tooling
-
-**Focus:** parsers/extractors (PE/ELF); loader test harness (I/O, logs, timers); reproducible test datasets.
-**Output:** versioned `tools/` with docs and basic tests.&#x20;
+**Goal.** Implement 2–3 classic injection/execution techniques in userland and understand the effect of **DEP/ASLR/CFG** and handle policies; prepare for Evasion/Obfuscation and the upcoming Initial Access module.
+**Highlights.** Classic injection: `CreateRemoteThread + LoadLibrary`. **APC queueing** (incl. early-bird) and synchronization issues. **Process hollowing** (intro) vs module stomping. PPID spoofing and relevant `CreateProcess` options for staged execution in a lab. Light obfuscation: hashed API resolution, hidden strings. Mitigations: DEP/ASLR/CFG, lab AV/signing basics; common detection surfaces. Intro to **syscalls** for basic ops (no unhooking yet).
+**PBR examples.** **Mode-switching loader** with CLI-selectable technique (at least CRT+LL and APC) and controlled logging; **hollowing PoC** against a lab binary with evidence and safe reversion; **trace comparison** across techniques under a fixed checklist with documented artifact differences.
+**PAD evidence.** Mitigation analysis, detection-surface notes, and an improvement plan feeding into Phase 3 and modules 8A/8B.
 
 ---
 
-## What you’ll learn — capabilities & mindset
+## What you’ll learn (skills & mindset)
 
-* **Analyst’s pipeline:** know when to go static vs dynamic, how to pivot between them, and how to script away repetition.
-* **Binary literacy:** read PE structures confidently; reason about imports, relocations, and TLS effects on loader behavior.
-* **In-memory execution:** build loaders that are reliable, observable, and reversible in lab.
-* **Mitigation awareness:** measure the impact of DEP/ASLR/CFG and manage handle/process hygiene.
-* **Evidence discipline:** produce clean, reproducible repos that a third party can re-run without guesswork.
-
----
-
-## Result & success criteria
-
-* **Technical**:
-
-  * Reproducible unpack of a packed sample; PE parser that passes basic integrity checks.
-  * Loader executing benign payloads via **≥2 techniques**; **intro hollowing** PoC without crashes.
-* **Documentation**:
-
-  * Clear PADs (block-integrated missions) with diagrams, method, risks, and “how-to-reproduce”.
-* **Quality bar (rubric)**:
-
-  * **A:** reversing report + clean unpack; usable parser; loader ≥2 techniques; stable hollowing PoC; fully reproducible docs.
-  * **B:** ≥80% PBR/PAD; one unstable technique or partial parser; docs sufficient.
-  * **C:** ≥60% PBR/PAD; partial reproducibility.
-  * **Redo:** <60% or severe instability in loaders/injection.&#x20;
+* Applied reversing with a reproducible static/dynamic workflow and basic unpacking.
+* Practical PE knowledge and in-memory execution via loaders and intro manual mapping.
+* Multiple userland execution paths, their artifacts, and mitigation-aware design.
+* Documentation habits that produce third-party-reproducible evidence suitable for bounty contexts.
 
 ---
 
-## PBR & PAD (how they work here)
+## Outcomes & success criteria
 
-* **PBR:** small, targeted labs with pinned versions, `ENVINFO.md`, `SHA256SUMS.txt`, and scripted runs (`make lab-setup && make run`).
-* **PAD (current definition):** **Practical Aptitude Drill** — a **single, integrated mission per block** that exercises multiple stacks/techniques from that block and evaluates applied proficiency with evidence and rollback.
-  
+* Working **unpacked** binary with a functional IAT and analyzable static profile.
+* A usable **PE parser** and tooling that accelerates your analysis.
+* A **stable loader** that executes a benign payload and supports ≥2 techniques.
+* A **process hollowing** PoC that is reproducible and safely reversible in lab conditions.
+* Phase-level grading: **A** = clean unpack + useful PE parser + ≥2 loader techniques + stable hollowing PoC + clear, one-command reproducibility; **B** = ≥80% PBR/PAD, one unstable technique or incomplete parser; **C** = ≥60% with partial reproducibility; **Redo** = <60% or severe instability.
+
 ---
 
-## Ethics & scope
+## PBR & PAD — how we evaluate
 
-* **Lab-only** (VMs, NAT outbound, benign payloads).
-* **No** testing against third-party systems without written authorization.
-* **All** artifacts must be reversible with snapshots/rollback.
-* **No** operational malware; educational PoCs only.
+* **PBR (Proof-of-Bounty-Readiness).** A **reproducible lab** with explicit objectives, testable steps, and artifacts (code, logs, screenshots, hashsets).
+* **PAD (Practical Aptitude Drill).** A **block-level integrated mission** that exercises multiple techniques you learned in the block. It is evaluative, includes risks/limits, and must be reproducible in your lab.
+
+> Every block closes with **PBR + PAD** and a minimal evidence package.
