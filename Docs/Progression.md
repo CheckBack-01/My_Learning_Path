@@ -113,7 +113,7 @@ _All items remain ☐ Not started for PBR/PAD; only light reinforcement._
 
 ---
 
-## Update Checklist (when you close items)
+### Update Checklist (when you close items)
 1. Change status: `☐` → `◐` → `✔`.  
 2. Increment counters at the top.  
 3. Add links:
@@ -127,6 +127,6 @@ _All items remain ☐ Not started for PBR/PAD; only light reinforcement._
 
 ---
 
-## Notes
+### Notes
 - **PAD = Practical Aptitude Drill:** a **block-integrated mission** that exercises several techniques and evaluates mastery, backed by reproducible evidence.  
 - All work is **lab-only**, benign artifacts, and OPSEC/Legal controlled.
