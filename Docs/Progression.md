@@ -9,7 +9,7 @@
 
 ---
 
-## Global Counters (auto/semiauto-ready)
+### Global Counters (auto/semiauto-ready)
 - **PBR (closed):** 0  
 - **PAD (closed):** 0  
 - **Evidence links present:** 0  
@@ -19,7 +19,7 @@
 
 ---
 
-## Quarter View (PBR/PAD status by block)
+### Quarter View (PBR/PAD status by block)
 
 ### Q1 — 2025-08-14 → 2025-11-30 (Phase 1 — start)
 | Block | Title | PBR | PAD | Status | Notes |
@@ -117,12 +117,13 @@ _All items remain ☐ Not started for PBR/PAD; only light reinforcement._
 1. Change status: `☐` → `◐` → `✔`.  
 2. Increment counters at the top.  
 3. Add links:
-   - **Labs:** `labs/<Phase>/<Block>/<pbrXX>/`
-   - **Evidence:** `evidence/<Phase>/<Block>/<pbrXX>/`
-   - **PAD:** `docs/PAD/<Phase>/<Block>.md`
+ - **Labs:** `Phases/P1_ENIAC/0B01/D14_FHS/`
+ - **Evidence:** `Phases/P1_ENIAC/0B01/D14_FHS/evidence/`
+ - **PAD:** `Phases/P1_ENIAC/0B01/PAD/`
+   
 4. Commit with a clear message:
-   - `feat(pbr): close PBR-0.1 (0B01) + evidence + PAD draft`
-   - `docs(pad): finalize PAD-0 (0B01)`
+    - `feat(pbr): close PBR-0.1 (0B01) + evidence + PAD draft`
+    - `docs(pad): finalize PAD-0 (0B01)`
 
 ---
 
